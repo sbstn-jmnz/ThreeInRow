@@ -3,7 +3,7 @@ const GameState = [[0,0,0],
                    [0,0,0]]
 
 const ThreeInRow = {
-  cells: Array.from(document.querySelectorAll(".col")),
+  cells: null,
 
   humanPlay(){
     this.innerText = 'X'
@@ -15,7 +15,7 @@ const ThreeInRow = {
     ThreeInRow.machinePlay(ThreeInRow.cells)
   },
 
-  machinePlay(cells){
+  machinePlay(){
     // Find a non played cell and mark it with 'O'
     ThreeInRow.findNotPlayedCel((cel)=>{
       cel.innerText = 'O'
@@ -40,14 +40,17 @@ const ThreeInRow = {
     GameState[cords[0]][cords[1]] = sign
   },
 
+  //TODO: Complete the function below
   checkWin(){},
 
   init(){
     // Select all cells and add click listener
-    ThreeInRow.cells.forEach((cel)=> cel.addEventListener('click', ThreeInRow.humanPlay))
+    this.cells = Array.from(document.querySelectorAll(".col"))
+    this.cells.forEach((cel)=> cel.addEventListener('click', this.humanPlay))
+    
     // If random_boolean is bigger than 0,5 the machine plays first
     const random_boolean = Math.random() < 0.5;
-    if(random_boolean) ThreeInRow.machinePlay(ThreeInRow.cells) 
+    if(random_boolean) this.machinePlay() 
   }
 }
 
