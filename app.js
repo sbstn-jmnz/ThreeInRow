@@ -17,22 +17,21 @@ const ThreeInRow = {
 
   machinePlay(){
     // Find a non played cell and mark it with 'O'
-    ThreeInRow.findNotPlayedCel((cel)=>{
+      let cel = ThreeInRow.findNotPlayedCel()
       cel.innerText = 'O'
       let cords = cel.getAttribute('data-cel').split(':')
       ThreeInRow.updateState(cords ,'O')
       cel.removeEventListener('click',ThreeInRow.humanPlay)
       ThreeInRow.checkWin()
-    })
   },
 
-  findNotPlayedCel(cb){
+  findNotPlayedCel(){
     let randomCel = Math.floor(Math.random() * ThreeInRow.cells.length);
     if(ThreeInRow.cells[randomCel].childNodes.length === 0){
-      cb(ThreeInRow.cells[randomCel])
+      return ThreeInRow.cells[randomCel]
     }else{
       ThreeInRow.checkWin()
-      ThreeInRow.findNotPlayedCel(cb)
+      ThreeInRow.findNotPlayedCel()
     }
   },
 
